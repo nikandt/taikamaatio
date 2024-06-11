@@ -1,0 +1,231 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='utf-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+        meta(name='description', content='')
+        meta(name='author', content='')
+        meta(name='google-site-verification', content='9mmBkEiEoEBSaYKU5r8OUhndmjjSTMXVpHnceJIYSRI')
+
+        title Taikamaatio
+
+        link(rel='icon', type='image/x-icon', href='assets/favicon.ico')
+
+        // Font Awesome icons (free version)
+        script(src='https://use.fontawesome.com/releases/v6.3.0/js/all.js', crossorigin='anonymous')
+
+        // Google fonts
+        link(rel='preconnect', href='https://fonts.gstatic.com')
+        link(href='https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap' rel='stylesheet')
+        link(href='https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap' rel='stylesheet')
+
+        // Core theme CSS (includes Bootstrap)
+        link(href='css/styles.css', rel='stylesheet')
+
+        style.
+            body, html {
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+            }
+            #container {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: -1; /* Background layer */
+            }
+
+    body
+        // Three.js Container
+        #container
+
+        // Masthead
+        .masthead
+            .masthead-content.text-white
+                .container-fluid.px-4.px-lg-0
+                    h1.fst-italic.lh-1.mb-4 Taikamaatio
+                    p.mb-5
+                        | Ota yhteyttä
+
+                form(action="https://formspree.io/f/xoqggepj", method="POST")
+                    label
+                        | Sähköpostiosoite
+                        input(type="email", name="email", required)
+                    label
+                        | Viesti
+                        textarea(name="message", required)
+                    button(type="submit") Lähetä
+
+
+
+        // Social Icons
+        // For more icon options, visit https://fontawesome.com/icons?d=gallery&p=2&s=brands
+        .social-icons
+            .d-flex.flex-row.flex-lg-column.justify-content-center.align-items-center.h-100.mt-3.mt-lg-0
+               a.btn.btn-dark.m-3(href='https://instagram.com/taikamaatio')
+                   i.fab.fa-instagram
+
+        footer
+            style.
+                footer {
+                    position: fixed;
+                    bottom: 0;
+                    width: 100%;
+                    background-color: #000;
+                    color: #fff;
+                    text-align: center;
+                    padding: 20px 0;
+                    z-index: 1000;
+                    display: flex;
+                    justify-content: space-around;
+                    flex-wrap: wrap;
+                }
+                .footer-section {
+                    flex: 1 1 200px; /* Flexbox for responsive design */
+                    margin: 10px;
+                }
+                @media (max-width: 600px) {
+                    footer {
+                        flex-direction: column;
+                        align-items: center;
+                    }
+                    .footer-section {
+                        margin: 5px 0;
+                    }
+                }
+            .footer-section
+                h4 Contact Email
+                p contact@example.com
+            .footer-section
+                h4 VAT ID
+                p FI31299308
+            .footer-section
+                h4 Address
+                p 123 Main St, City, Country
+
+        // Bootstrap core JS
+        script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js')
+
+        // Core theme JS
+        script(src='js/scripts.js')
+
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        // * *                               SB Forms JS                               * *
+        // * * Activate your form at https://startbootstrap.com/solution/contact-forms * *
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+        // Three.js Importmap
+        script(type='importmap').
+            {
+                "imports": {
+                    "three": "https://cdn.jsdelivr.net/npm/three/build/three.module.js",
+                    "three/addons/": "https://cdn.jsdelivr.net/npm/three/examples/jsm/"
+                }
+            }
+
+        // Three.js Script
+        script(type='module').
+            import * as THREE from 'three';
+            import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+            import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+            import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+            import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+            import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+            import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+
+            let camera, renderer, mixer, clock, composer;
+
+            const params = {
+                threshold: 0,
+                strength: 1,
+                radius: 0,
+                exposure: 1
+            };
+
+            init();
+
+            async function init() {
+                const container = document.getElementById('container');
+
+                clock = new THREE.Clock();
+
+                const scene = new THREE.Scene();
+                scene.background = new THREE.Color(0x000000);
+
+                camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 100);
+                camera.position.set(-5, 2.5, -3.5);
+                scene.add(camera);
+
+                scene.add(new THREE.AmbientLight(0xcccccc));
+
+                const pointLight = new THREE.PointLight(0xffffff, 100);
+                camera.add(pointLight);
+
+                const loader = new GLTFLoader();
+                const gltf = await loader.loadAsync('PrimaryIonDrive.glb');
+
+                const model = gltf.scene;
+                scene.add(model);
+
+                // Replace all mesh materials with red MeshStandardMaterial
+                //model.traverse((node) => {
+                //    if (node.isMesh) {
+                //      node.material = new THREE.MeshStandardMaterial({ color: 0x0000ff });
+                //    }
+                //});
+
+                mixer = new THREE.AnimationMixer(model);
+                const clip = gltf.animations[0];
+                mixer.clipAction(clip.optimize()).play();
+
+                renderer = new THREE.WebGLRenderer({ antialias: true });
+                renderer.setPixelRatio(window.devicePixelRatio);
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                renderer.setAnimationLoop(animate);
+                renderer.toneMapping = THREE.ReinhardToneMapping;
+                container.appendChild(renderer.domElement);
+
+                const renderScene = new RenderPass(scene, camera);
+
+                const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85);
+                bloomPass.threshold = params.threshold;
+                bloomPass.strength = params.strength;
+                bloomPass.radius = params.radius;
+
+                const outputPass = new OutputPass();
+
+                composer = new EffectComposer(renderer);
+                composer.addPass(renderScene);
+                composer.addPass(bloomPass);
+                composer.addPass(outputPass);
+
+                const controls = new OrbitControls(camera, renderer.domElement);
+                controls.maxPolarAngle = Math.PI * 0.5;
+                controls.minDistance = 3;
+                controls.maxDistance = 8;
+
+                window.addEventListener('resize', onWindowResize);
+            }
+
+            function onWindowResize() {
+                const width = window.innerWidth;
+                const height = window.innerHeight;
+
+                camera.aspect = width / height;
+                camera.updateProjectionMatrix();
+
+                renderer.setSize(width, height);
+                composer.setSize(width, height);
+            }
+
+            function animate() {
+                const delta = clock.getDelta();
+
+                mixer.update(delta);
+
+                composer.render();
+            }
