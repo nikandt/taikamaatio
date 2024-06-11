@@ -87,6 +87,10 @@
                 .footer-section {
                     margin: 5px 0;
                 }
+                body,
+                html {
+                    overflow-y: hidden; /* Hide vertical scrollbar on mobile devices */
+                }
             }
             /* Minimalist scrollbar */
             ::-webkit-scrollbar {
@@ -112,19 +116,29 @@
             <div class="masthead-content text-white">
                 <div class="container-fluid px-4 px-lg-0">
                     <h1 class="lh-1 mb-4">Taikamaatio</h1>
-                    <p class="mb-5">Ota yhteyttä</p>
+                    <p class="mb-5">Jätä yhteydenottopyyntö</p>
+                    <form id="contactForm" data-sb-form-api-token="360bc9c6-4137-4504-86e0-10b85e5da7bb">
+                        <!-- Email address input-->
+                        <div class="row input-group-newsletter">
+                            <div class="col"><input class="form-control" id="email" type="email" placeholder="Sähköpostiosoite..." aria-label="Sähköpostiosoite..." data-sb-validations="required,email" /></div>
+                            <div class="col-auto"><button class="btn btn-primary disabled" id="submitButton" type="submit">Lähetä</button></div>
+                        </div>
+                        <div class="invalid-feedback mt-2" data-sb-feedback="email:required">Sähköpostiosoite on pakollinen.</div>
+                        <div class="invalid-feedback mt-2" data-sb-feedback="email:email">Sähköpostiosoite ei kelpaa.</div>
+                        <!-- Submit success message-->
+                        <!---->
+                        <!-- This is what your users will see when the form-->
+                        <!-- has successfully submitted-->
+                        <div class="d-none" id="submitSuccessMessage">
+                            <div class="text-center mb-3 mt-2"><div class="fw-bolder">Onnistui!</div></div>
+                        </div>
+                        <!-- Submit error message-->
+                        <!---->
+                        <!-- This is what your users will see when there is-->
+                        <!-- an error submitting the form-->
+                        <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3 mt-2">Tapahtui virhe!</div></div>
+                    </form>
                 </div>
-                <form action="https://formspree.io/f/xoqggepj" method="POST">
-                    <label>
-                        Sähköpostiosoite
-                        <input type="email" name="email" required />
-                    </label>
-                    <label>
-                        Viesti
-                        <textarea name="message" required></textarea>
-                    </label>
-                    <button type="submit">Lähetä</button>
-                </form>
             </div>
         </div>
         <!-- Social Icons-->
@@ -135,7 +149,6 @@
             <!--       i.fab.fa-instagram-->
         </div>
         <footer>
-            <div class="footer-section"><p></p></div>
             <div class="footer-section"><p>Y-tunnus: 3129930-8</p></div>
             <div class="footer-section"><p>&copy 2024 Taikamaatio Oy</p></div>
         </footer>
@@ -143,10 +156,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <!-- * *                               SB Forms JS                               * *-->
-        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
         <!-- Three.js Importmap-->
         <script type="importmap">
             {

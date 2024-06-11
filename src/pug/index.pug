@@ -92,6 +92,9 @@ html(lang='en')
                 .footer-section {
                     margin: 5px 0;
                 }
+                body, html {
+                    overflow-y: hidden; /* Hide vertical scrollbar on mobile devices */
+                }
             }
             /* Minimalist scrollbar */
             ::-webkit-scrollbar {
@@ -118,16 +121,39 @@ html(lang='en')
                 .container-fluid.px-4.px-lg-0
                     h1.lh-1.mb-4 Taikamaatio
                     p.mb-5
-                        | Ota yhteyttä
+                        | Jätä yhteydenottopyyntö
 
-                form(action="https://formspree.io/f/xoqggepj", method="POST")
-                    label
-                        | Sähköpostiosoite
-                        input(type="email", name="email", required)
-                    label
-                        | Viesti
-                        textarea(name="message", required)
-                    button(type="submit") Lähetä
+
+                    form#contactForm(data-sb-form-api-token='360bc9c6-4137-4504-86e0-10b85e5da7bb')
+                        // Email address input
+                        .row.input-group-newsletter
+                            .col
+                                input#email.form-control(
+                                    type='email',
+                                    placeholder='Sähköpostiosoite...',
+                                    aria-label='Sähköpostiosoite...',
+                                    data-sb-validations='required,email'
+                                )
+                            .col-auto
+                                button#submitButton.btn.btn-primary.disabled(type='submit') Lähetä
+                        .invalid-feedback.mt-2(data-sb-feedback='email:required')
+                            | Sähköpostiosoite on pakollinen.
+                        .invalid-feedback.mt-2(data-sb-feedback='email:email')
+                            | Sähköpostiosoite ei kelpaa.
+                        // Submit success message
+                        //
+                        // This is what your users will see when the form
+                        // has successfully submitted
+                        #submitSuccessMessage.d-none
+                            .text-center.mb-3.mt-2
+                                .fw-bolder Onnistui!
+                        
+                        // Submit error message
+                        //
+                        // This is what your users will see when there is
+                        // an error submitting the form
+                        #submitErrorMessage.d-none
+                            .text-center.text-danger.mb-3.mt-2 Tapahtui virhe!
 
         // Social Icons
         // For more icon options, visit https://fontawesome.com/icons?d=gallery&p=2&s=brands
@@ -137,8 +163,6 @@ html(lang='en')
             //       i.fab.fa-instagram
 
         footer
-            .footer-section
-                p 
             .footer-section
                 p Y-tunnus: 3129930-8
             .footer-section
@@ -150,10 +174,7 @@ html(lang='en')
         // Core theme JS
         script(src='js/scripts.js')
 
-        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-        // * *                               SB Forms JS                               * *
-        // * * Activate your form at https://startbootstrap.com/solution/contact-forms * *
-        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        script(src='https://cdn.startbootstrap.com/sb-forms-latest.js')
 
         // Three.js Importmap
         script(type='importmap').
