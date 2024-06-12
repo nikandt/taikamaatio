@@ -1,0 +1,30 @@
+//
+// Scrollbar
+//
+
+@media (max-width: 600px) {
+	footer {
+		flex-direction: column;
+		align-items: center;
+	}
+	.footer-section {
+		margin: 5px 0;
+	}
+	body, html {
+		overflow-y: hidden; /* Hide vertical scrollbar on mobile devices */
+	}
+}
+/* Minimalist scrollbar */
+::-webkit-scrollbar {
+	width: 8px;
+}
+::-webkit-scrollbar-track {
+	background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+	background: #888;
+	border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}
