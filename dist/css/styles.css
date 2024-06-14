@@ -10859,7 +10859,7 @@ video.bg-video {
 
 @media (pointer: coarse) and (hover: none) {
   body {
-    background: url("../assets/img/bg-mobile-fallback.jpg") #0a0a8b no-repeat center center scroll;
+    background: #0a0a0a;
     background-size: cover;
   }
   body video {
@@ -10869,10 +10869,12 @@ video.bg-video {
 .masthead {
   position: relative;
   overflow: hidden;
-  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 1rem;
+  width: 100%;
+  height: auto;
 }
 .masthead:before {
   content: "";
@@ -10886,6 +10888,7 @@ video.bg-video {
   background-color: rgba(0, 0, 0, 0.2);
 }
 .masthead .masthead-content {
+  z-index: 1;
   position: relative;
   max-width: 40rem;
   padding-top: 5rem;
@@ -10973,25 +10976,6 @@ video.bg-video {
     width: auto;
   }
 }
-footer {
-  position: relative; /* Ensure footer is not overlapped by other elements */
-  width: 100%;
-  background-color: #000;
-  color: #fff;
-  text-align: center;
-  padding: 20px 0;
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  z-index: 1; /* Ensure it is above any background layers */
-  font-family: "DM Sans", sans-serif;
-}
-
-.footer-section {
-  flex: 1 1 200px; /* Flexbox for responsive design */
-  margin: 10px;
-}
-
 @media (max-width: 600px) {
   footer {
     flex-direction: column;

@@ -5,10 +5,12 @@
 .masthead {
     position: relative;
     overflow: hidden;
-    z-index: 2;
     display: flex;
     align-items: center;
     justify-content: center;
+	padding: 1rem;
+	width: 100%;
+	height: auto;
 
     // Overlay for the masthead
     &:before {
@@ -25,6 +27,7 @@
 
     // Masthead content element
     .masthead-content {
+		z-index: 1;
         position: relative;
         max-width: 40rem;
         padding-top: 5rem;

@@ -47,7 +47,7 @@ video.bg-video {
 
 @media (pointer: coarse) and (hover: none) {
     body {
-        background: url('../assets/img/bg-mobile-fallback.jpg') $primary no-repeat center center scroll;
+        background: #0a0a0a;
         background-size: cover;
     }
 
